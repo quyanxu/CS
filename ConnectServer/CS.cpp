@@ -302,7 +302,7 @@ INT_PTR CALLBACK MainDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			return TRUE;
 		}
 
-		case 8003:
+		case 8004:
 		case ID_MENU_LOCAL_CONNECT_ONLY:
 		case ID_TOOL_LOCAL_ONLY:  // 40033
 		{
@@ -330,13 +330,12 @@ INT_PTR CALLBACK MainDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_LogProc.LogAddFunc("Local Network Connect Only : %s", g_bLocalNetworkConnectOnly ? "ON" : "OFF");
 
 			// Update toolbar button state
-			//SendMessageA(hToolBar, TB_CHECKBUTTON, ID_TOOL_LOCAL_ONLY, MAKELPARAM(g_bLocalNetworkConnectOnly, 0));
-			SendMessage(hToolBar, TB_CHANGEBITMAP, ID_TOOL_LOCAL_ONLY, g_bLocalNetworkConnectOnly ? 8 : 3);
+			SendMessage(hToolBar, TB_CHANGEBITMAP, 8004, g_bLocalNetworkConnectOnly ? 8 : 3);
 
 			return TRUE;
 		}
 
-		case 8004:
+		case 8003:
 		case ID_MENU_TERMINATE_CS_TRAY:
 		case ID_MENU_TERMINATE_CS:
 		case ID_TOOL_TERMINATE:   // 40032
@@ -734,7 +733,7 @@ INT_PTR CALLBACK AboutDlgProc(HWND hWndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 			// TransparentBlt: source has magenta (0xFF00FF) as transparent color
 			// Original: TransparentBlt(hDC, 123, 52, 140, 80, hMemDC, 0, 0, 106, 68, 0xFFFFFF)
 			// Note: Last param is actually the transparent color key (0xFF00FF for magenta)
-			TransparentBlt(hDC, 123, 52, 140, 80, hMemDC, 0, 0, 106, 68, 0x00FF00FF);
+			TransparentBlt(hDC, 123, 52, 140, 80, hMemDC, 0, 0, 106, 68, RGB(0, 255, 0));
 
 			SelectObject(hMemDC, hOldBmp);
 			DeleteObject(hBmp);
